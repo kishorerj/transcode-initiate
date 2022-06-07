@@ -1,0 +1,6 @@
+Flask
+gunicorn
+google-cloud-logging
+google-cloud-video-transcoder
+google-cloud-storage
+google-cloud-bigquery
