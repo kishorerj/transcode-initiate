@@ -1,10 +1,10 @@
 from google.cloud import bigquery
 from datetime import datetime
-
+import os
 
 def update_table(project, dataset, table, job_id, status, input_bucket_uri, output_bucket_uri, job_template):
-    project_id="kishorerjbloom"
-    dataset_id="test_sample"
+    project_id= os.environ.get('project')
+    dataset_id= os.environ.get('dataset')
     table_id="trancoder_job_dtls"
     table_id = project+ "." + dataset + "." + table
     client = bigquery.Client()
@@ -40,5 +40,4 @@ def insert_table(project, dataset, table, job_id, status, input_bucket_uri, outp
 if __name__ == "__main__":
     #insert_table()
     print("main hello")
-© 2022 GitHub, Inc.
-Terms
+
