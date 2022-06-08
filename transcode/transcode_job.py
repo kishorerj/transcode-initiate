@@ -12,7 +12,7 @@ def create_bucket(bucket_name):
     bucket = storage.Bucket(bucket_name)
     client.create_bucket(bucket)
 
-def create_job_from_preset( input_bucket, input_object):
+def create_job_from_preset( input_bucket, input_object, transcode_template, output_bucket):
     """Creates a job based on a job preset.
     Args:
         project_id: The GCP project ID.
@@ -24,7 +24,7 @@ def create_job_from_preset( input_bucket, input_object):
     trancoderClient = TranscoderServiceClient()
 
     input_uri="gs://"+input_bucket+"/"+input_object
-    output_uri="gs://media-out-kish/"+input_bucket+"/"+ input_object+ "/"
+    output_uri="gs://"+output_bucket+"/"+input_bucket+"/"+ input_object+ "/"
 
     
     client = logging.Client()
@@ -36,15 +36,15 @@ def create_job_from_preset( input_bucket, input_object):
     project_id = os.environ.get('project_id')
     location = os.environ.get('location')
 
-    project_id="kishorerjbloom"
-    dataset_id="test_sample"
-    table_id="trancoder_job_dtls"
+   
+    dataset_id=os.environ.get('dataset')
+    table_id="transcoder_job_dtls"
 
-    parent = "projects/kishorerjbloom/locations/us-east1"
+    parent = "projects/"+project_id+"/locations/"+ location
     job = transcoder_v1.types.Job()
     job.input_uri = input_uri
     job.output_uri = output_uri
-    job.template_id = "TEMP6"
+    job.template_id = transcode_template
 
     response = trancoderClient.create_job(parent=parent, job=job)
     print(f"Job: {response.name}")

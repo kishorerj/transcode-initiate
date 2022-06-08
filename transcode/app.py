@@ -1,10 +1,10 @@
 import logging as pythonlogging
 import os
 import base64
-import transcoderJob
+import transcode_job
 from google.cloud import logging
 from flask import Flask, request
-from secure import require_apikey
+from key import apikey
 
 
 app = Flask(__name__)
@@ -15,10 +15,10 @@ def health():
     return 'It is alive!\n'
 
 
-@app.route('/hello')
-@require_apikey
-def hello():
-    return {'hello': 'world'}
+@app.route('/secure')
+@apikey
+def health():
+    return 'I am secure!'
 
 @app.route("/", methods=["POST"])
 def index():
@@ -48,7 +48,7 @@ def index():
     print(f"Hello {name}!")
     inputs= name.split(",")
 
-    transcoderJob.create_job_from_preset(inputs[0],inputs[1])
+    transcode_job.create_job_from_preset(inputs[0],inputs[1],inputs[2],inputs[3])
 
     return ("DONE", 204)
 
