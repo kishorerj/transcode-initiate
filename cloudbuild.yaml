@@ -19,5 +19,5 @@ steps:
         "--platform",
         "managed",
         "--allow-unauthenticated",
-        "--set-env-vars=[dataset=\"transcode_media\",project=$PROJECT_ID,location=\"us-central1\"]"
+        "--set-env-vars=[dataset=\"transcode_media\",project_id=$PROJECT_ID,location=\"us-central1\"]"
       ]

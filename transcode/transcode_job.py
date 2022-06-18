@@ -35,8 +35,8 @@ def create_job_from_preset( input_bucket, input_object, transcode_template, outp
     
     project_id = os.environ.get('project_id')
     location = os.environ.get('location')
-
-   
+     
+    logger.log("Project location name "+ project_id+ ","+ location)
     dataset_id=os.environ.get('dataset')
     table_id="transcoder_job_dtls"
 
