@@ -16,7 +16,7 @@ def insert_table(project, dataset, table, job_id, status, input_bucket_uri, outp
     #errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
     client = bigquery.Client()
     query_text = f"""
-    INSERT {project}.{dataset}.{table} (job_id, status, start_date, end_date, input_media_uri, output_transcoded_uri, job_template)  
+    INSERT `{project}.{dataset}.{table}` (job_id, status, start_date, end_date, input_media_uri, output_transcoded_uri, job_template)  
     VALUES ('{job_id}', '{status}','{now}', '{now}', '{input_bucket_uri}', '{output_bucket_uri}', '{job_template}')
     """
     query_job = client.query(query_text)
