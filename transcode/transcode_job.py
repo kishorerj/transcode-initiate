@@ -48,7 +48,7 @@ def create_job_from_preset( input_bucket, input_object, transcode_template, outp
 
     response = trancoderClient.create_job(parent=parent, job=job)
     print(f"Job: {response.name}")
-    logger.log("Job name "+ response.name)
+    logger.log("Job name "+ response.name+ ","+ dataset_id )
 
     bq.insert_table(project_id,dataset_id, table_id, response.name, "PROCESSING", input_uri, output_uri, job.template_id)
     return response

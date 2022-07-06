@@ -34,7 +34,7 @@ def index():
     logger = client.logger("service_1")
     logger.log(pubsub_message)
     
-    name = "World"
+    name = ""
     if isinstance(pubsub_message, dict) and "data" in pubsub_message:
         name = base64.b64decode(pubsub_message["data"]).decode("utf-8").strip()
     logger.log(name)
