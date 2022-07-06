@@ -37,7 +37,7 @@ def create_job_from_preset( input_bucket, input_object, transcode_template, outp
     location = os.environ.get('location')
      
     logger.log("Project location name "+ project_id+ ","+ location)
-    dataset_id=os.environ.get('dataset')
+    dataset_id=os.environ.get('dataset',"transcode_media")
     table_id="transcoder_job_dtls"
 
     parent = "projects/"+project_id+"/locations/"+ location
@@ -48,7 +48,7 @@ def create_job_from_preset( input_bucket, input_object, transcode_template, outp
 
     response = trancoderClient.create_job(parent=parent, job=job)
     print(f"Job: {response.name}")
-    logger.log("Job name "+ response.name+ ","+ dataset_id )
+    logger.log("Job name "+ response.name )
 
     bq.insert_table(project_id,dataset_id, table_id, response.name, "PROCESSING", input_uri, output_uri, job.template_id)
     return response
